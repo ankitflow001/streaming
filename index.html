@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowtonne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Open+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: Apache-style — navy header band, light reading body, multi-column navy footer */
+:root{
+  --brand:#282661; --brand-deep:#19183C; --violet:#603CBA; --magenta:#B0237E; --red:#E3263A; --orange:#F26B22; --yellow:#F7B21E;
+  --bg:#FFFFFF; --surface:#F4F3FA; --fg:#1F1D3D; --muted:#5A577E; --line:#E2E0F0; --link:#603CBA;
+  --display:"Montserrat",system-ui,sans-serif; --body:"Open Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14132E;--surface:#1E1C44;--fg:#ECEAFB;--muted:#B3AFDA;--line:#2F2C63;--link:#BDB3FF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14132E;--surface:#1E1C44;--fg:#ECEAFB;--muted:#B3AFDA;--line:#2F2C63;--link:#BDB3FF;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.65}
+a{color:var(--link)} a:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.spectrum{height:6px;background:linear-gradient(90deg,var(--violet),var(--magenta),var(--red),var(--orange),var(--yellow))}
+header{background:var(--brand);color:#fff}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.brand svg{width:54px;height:54px}
+.brand b{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.04em}
+.brand small{display:block;font-size:11px;letter-spacing:.32em;opacity:.8;margin-top:-2px}
+.nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0;flex-wrap:wrap}
+.nav ul a{color:#fff;text-decoration:none;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.04em}
+.nav ul a:hover{color:var(--yellow)}
+.hero{background:var(--brand);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding-block:56px 72px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,5.2vw,64px);line-height:1.05;margin:0 0 18px;text-wrap:balance}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:19px;color:#DCD9F7;max-width:56ch;margin:0 0 28px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.06em;text-decoration:none}
+.btn.primary{background:#fff;color:var(--brand)} .btn.ghost{color:#fff;border:2px solid rgba(255,255,255,.55)}
+.hero-mark svg{width:100%;max-width:420px;display:block;margin:auto}
+main section{padding-block:64px}
+.eyebrow{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta)}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.2vw,38px);line-height:1.15;margin:8px 0 16px;text-wrap:balance}
+.lead{max-width:68ch;color:var(--muted);font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:36px}
+.feat{border-top:4px solid var(--c);padding-top:18px}
+.feat h3{font-family:var(--display);font-weight:800;font-size:19px;margin:0 0 8px}
+.feat p{margin:0;color:var(--muted)}
+.band{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.flow li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.flow b{font-family:var(--display);font-weight:800;color:var(--link)}
+.scale{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.scale span{font-family:var(--display);font-weight:600;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.scale span.q{background:var(--brand);color:#fff;border-color:var(--brand)}
+.news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:28px}
+.news article{min-width:0}
+.news time{font-size:13px;color:var(--muted)}
+.news h3{font-family:var(--display);font-weight:800;font-size:18px;margin:4px 0 6px}
+footer{background:var(--brand);color:#fff}
+footer .wrap{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding-block:56px}
+footer h4{font-family:var(--display);font-weight:800;font-size:15px;margin:0 0 14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+footer a{color:#fff;text-decoration:none;opacity:.9} footer a:hover{color:var(--yellow)}
+footer p{color:#DCD9F7;font-size:15px;max-width:44ch}
+.legal{border-top:1px solid rgba(255,255,255,.15);padding-block:18px;font-size:13px;color:#C3BEF5}
+@media (max-width:860px){.hero .wrap,.split{grid-template-columns:1fr}.grid,.news{grid-template-columns:1fr}footer .wrap{grid-template-columns:1fr 1fr}.hero-mark{order:-1}.hero-mark svg{max-width:240px}}
+@media (max-width:480px){footer .wrap{grid-template-columns:1fr}.flow li{grid-template-columns:1fr;gap:4px}}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Flowtonne home"><svg viewBox="0 0 400 400" aria-hidden="true"><defs><linearGradient id="f0hood" gradientUnits="userSpaceOnUse" x1="150" y1="330" x2="350" y2="110"><stop offset="0.00" stop-color="#603CBA"/><stop offset="0.50" stop-color="#8A2F9E"/><stop offset="1.00" stop-color="#B0237E"/></linearGradient><linearGradient id="f0face" gradientUnits="userSpaceOnUse" x1="220" y1="330" x2="340" y2="150"><stop offset="0.00" stop-color="#F26B22"/><stop offset="0.50" stop-color="#F7B21E"/><stop offset="1.00" stop-color="#FFE3A3"/></linearGradient><linearGradient id="f0beak" gradientUnits="userSpaceOnUse" x1="360" y1="140" x2="384" y2="206"><stop offset="0.00" stop-color="#B9B6F0"/><stop offset="0.50" stop-color="#6E6AC0"/><stop offset="1.00" stop-color="#2E2C6E"/></linearGradient></defs><g transform="translate(0 -20)"><path d="M200 130 C150 108 90 110 18 142 C90 142 150 148 186 158 Z" fill="#603CBA"/><path d="M184 164 C136 158 86 172 34 206 C106 196 146 198 180 202 Z" fill="#B0237E"/><path d="M178 208 C130 216 90 238 54 272 C120 252 150 248 180 250 Z" fill="#E3263A"/><path d="M182 256 C146 270 116 298 96 330 C141 306 166 298 190 294 Z" fill="#F26B22"/><path d="M196 326 C176 260 168 180 194 134 C224 104 288 98 324 114 C336 121 344 130 348 142 L348 190 L340 208 C330 250 304 296 262 322 C240 336 216 338 196 326 Z" fill="url(#f0face)"/><path d="M196 326 C176 260 168 180 194 134 C224 104 288 98 324 114 C336 121 344 130 348 142 L347 184 C332 194 320 197 314 199 C306 232 296 262 284 290 C274 268 268 240 266 212 C246 208 230 214 220 230 C214 262 220 296 226 334 C214 334 204 331 196 326 Z" fill="url(#f0hood)"/><path d="M344 140 C350 136 358 138 362 144 L362 182 C356 187 350 187 344 185 Z" fill="#F7B21E"/><circle cx="353" cy="157" r="5.5" fill="#19183C"/><circle cx="353" cy="157" r="1.8" fill="#F7B21E"/><path d="M360 142 C368 143 375 148 379 156 C384 167 384 188 376 206 C375 199 374 195 371 193 L367 198 L364 188 L350 188 L360 182 Z" fill="url(#f0beak)"/><path d="M348 191 L363 192 L366 199 C360 206 350 208 342 205 Z" fill="#6E6AC0"/><circle cx="300" cy="150" r="24" fill="#F7B21E"/><circle cx="301" cy="150" r="17" fill="#19183C"/><circle cx="307" cy="144" r="5.5" fill="#fff"/><path d="M272 128 C292 118 318 122 332 134" fill="none" stroke="#19183C" stroke-width="6" stroke-linecap="round" opacity="0.55"/></g></svg><span><b>FLOWTONNE</b><small>DATA PLATFORM</small></span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Platform</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Where Quettabytes Flow at the <em>Speed of Now</em></h1>
+      <p>Flowtonne is a data platform built for tonnes of data in motion. Ingest, process and serve streams and batches on one engine, so every team works from the same live picture.</p>
+      <div class="cta"><a class="btn primary" href="#about">Learn more</a><a class="btn ghost" href="#community">Get involved</a></div>
+    </div>
+    <div class="hero-mark"><svg viewBox="0 0 400 400" aria-hidden="true"><defs><linearGradient id="f1hood" gradientUnits="userSpaceOnUse" x1="150" y1="330" x2="350" y2="110"><stop offset="0.00" stop-color="#603CBA"/><stop offset="0.50" stop-color="#8A2F9E"/><stop offset="1.00" stop-color="#B0237E"/></linearGradient><linearGradient id="f1face" gradientUnits="userSpaceOnUse" x1="220" y1="330" x2="340" y2="150"><stop offset="0.00" stop-color="#F26B22"/><stop offset="0.50" stop-color="#F7B21E"/><stop offset="1.00" stop-color="#FFE3A3"/></linearGradient><linearGradient id="f1beak" gradientUnits="userSpaceOnUse" x1="360" y1="140" x2="384" y2="206"><stop offset="0.00" stop-color="#B9B6F0"/><stop offset="0.50" stop-color="#6E6AC0"/><stop offset="1.00" stop-color="#2E2C6E"/></linearGradient></defs><g transform="translate(0 -20)"><path d="M200 130 C150 108 90 110 18 142 C90 142 150 148 186 158 Z" fill="#603CBA"/><path d="M184 164 C136 158 86 172 34 206 C106 196 146 198 180 202 Z" fill="#B0237E"/><path d="M178 208 C130 216 90 238 54 272 C120 252 150 248 180 250 Z" fill="#E3263A"/><path d="M182 256 C146 270 116 298 96 330 C141 306 166 298 190 294 Z" fill="#F26B22"/><path d="M196 326 C176 260 168 180 194 134 C224 104 288 98 324 114 C336 121 344 130 348 142 L348 190 L340 208 C330 250 304 296 262 322 C240 336 216 338 196 326 Z" fill="url(#f1face)"/><path d="M196 326 C176 260 168 180 194 134 C224 104 288 98 324 114 C336 121 344 130 348 142 L347 184 C332 194 320 197 314 199 C306 232 296 262 284 290 C274 268 268 240 266 212 C246 208 230 214 220 230 C214 262 220 296 226 334 C214 334 204 331 196 326 Z" fill="url(#f1hood)"/><path d="M344 140 C350 136 358 138 362 144 L362 182 C356 187 350 187 344 185 Z" fill="#F7B21E"/><circle cx="353" cy="157" r="5.5" fill="#19183C"/><circle cx="353" cy="157" r="1.8" fill="#F7B21E"/><path d="M360 142 C368 143 375 148 379 156 C384 167 384 188 376 206 C375 199 374 195 371 193 L367 198 L364 188 L350 188 L360 182 Z" fill="url(#f1beak)"/><path d="M348 191 L363 192 L366 199 C360 206 350 208 342 205 Z" fill="#6E6AC0"/><circle cx="300" cy="150" r="24" fill="#F7B21E"/><circle cx="301" cy="150" r="17" fill="#19183C"/><circle cx="307" cy="144" r="5.5" fill="#fff"/><path d="M272 128 C292 118 318 122 332 134" fill="none" stroke="#19183C" stroke-width="6" stroke-linecap="round" opacity="0.55"/></g></svg></div>
+  </div>
+</section>
+<div class="spectrum"></div>
+
+<main>
+  <section id="about">
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow">About Flowtonne</div>
+        <h2>Data measured in tonnes, moving like a falcon</h2>
+        <p class="lead">The name says it plainly: <strong>flow</strong> plus <strong>tonne</strong>. Data arrives in huge volumes and it has to keep moving. Our mark is the peregrine falcon, the fastest animal on Earth, because speed at scale is the whole point of the platform.</p>
+      </div>
+      <div>
+        <p>Flowtonne brings ingestion, stream processing, storage and query together. Pipelines that used to need five tools and a week of glue code become a few lines of configuration.</p>
+        <p>From kilobytes to quettabytes, the same platform grows with you.</p>
+        <div class="scale" aria-label="Data scale">
+          <span>KB</span><span>MB</span><span>GB</span><span>TB</span><span>PB</span><span>EB</span><span>ZB</span><span>YB</span><span>RB</span><span class="q">QB · 10³⁰ bytes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="band">
+    <div class="wrap">
+      <div class="eyebrow">The platform</div>
+      <h2>Everything your data needs, in one flow</h2>
+      <div class="grid">
+        <div class="feat" style="--c:var(--violet)"><h3>Ingest at scale</h3><p>Connect databases, event streams, files and APIs. Flowtonne takes in data continuously, without nightly batch windows.</p></div>
+        <div class="feat" style="--c:var(--magenta)"><h3>Real-time processing</h3><p>Transform, join and enrich events the moment they land, so dashboards and alerts reflect what is happening now.</p></div>
+        <div class="feat" style="--c:var(--red)"><h3>Unified storage</h3><p>Streams and history live side by side. Query the last second and the last five years with the same SQL.</p></div>
+        <div class="feat" style="--c:var(--orange)"><h3>Built to scale out</h3><p>Add nodes as volume grows. Workloads rebalance automatically, with no re-architecture.</p></div>
+        <div class="feat" style="--c:var(--yellow)"><h3>Open by design</h3><p>Standard formats and open APIs keep your data portable and your stack yours.</p></div>
+        <div class="feat" style="--c:var(--brand)"><h3>Governed and secure</h3><p>Lineage, access control and audit logs are built in, not bolted on.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow">How it works</div>
+        <h2>From source to insight in four steps</h2>
+        <p class="lead">Every pipeline in Flowtonne follows the same path, so new teams pick it up quickly.</p>
+      </div>
+      <ol class="flow">
+        <li><b>Connect</b><span>Point Flowtonne at your sources: Kafka topics, Postgres tables, S3 buckets or REST endpoints.</span></li>
+        <li><b>Shape</b><span>Clean, join and aggregate with SQL or code. Changes deploy without stopping the stream.</span></li>
+        <li><b>Store</b><span>Results land in tiered storage: hot for live queries, cold for cheap long-term history.</span></li>
+        <li><b>Serve</b><span>Feed dashboards, ML models and apps through SQL, APIs and live subscriptions.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="news" class="band">
+    <div class="wrap">
+      <div class="eyebrow">Latest news</div>
+      <h2>What's new at Flowtonne</h2>
+      <div class="news">
+        <article><time>Example post</time><h3>Introducing the Flowtonne brand</h3><p>Our new peregrine falcon mark and the story behind "Where Quettabytes Flow at the Speed of Now".</p></article>
+        <article><time>Example post</time><h3>Flowtonne roadmap</h3><p>Where the platform is heading next: connectors, the query engine and the developer experience.</p></article>
+        <article><time>Example post</time><h3>Join the early access program</h3><p>We are looking for teams moving serious data volumes to shape the platform with us.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="wrap">
+      <div class="eyebrow">Community</div>
+      <h2>Build Flowtonne with us</h2>
+      <p class="lead">Flowtonne is built in the open. Read the code, open an issue, or send a pull request. Interns and first-time contributors are welcome; every good first issue is labelled.</p>
+      <div class="cta" style="margin-top:20px"><a class="btn primary" style="background:var(--brand);color:#fff" href="https://flowtonne.com">flowtonne.com</a></div>
+    </div>
+  </section>
+</main>
+
+<div class="spectrum"></div>
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><svg viewBox="0 0 400 400" aria-hidden="true"><defs><linearGradient id="f2hood" gradientUnits="userSpaceOnUse" x1="150" y1="330" x2="350" y2="110"><stop offset="0.00" stop-color="#603CBA"/><stop offset="0.50" stop-color="#8A2F9E"/><stop offset="1.00" stop-color="#B0237E"/></linearGradient><linearGradient id="f2face" gradientUnits="userSpaceOnUse" x1="220" y1="330" x2="340" y2="150"><stop offset="0.00" stop-color="#F26B22"/><stop offset="0.50" stop-color="#F7B21E"/><stop offset="1.00" stop-color="#FFE3A3"/></linearGradient><linearGradient id="f2beak" gradientUnits="userSpaceOnUse" x1="360" y1="140" x2="384" y2="206"><stop offset="0.00" stop-color="#B9B6F0"/><stop offset="0.50" stop-color="#6E6AC0"/><stop offset="1.00" stop-color="#2E2C6E"/></linearGradient></defs><g transform="translate(0 -20)"><path d="M200 130 C150 108 90 110 18 142 C90 142 150 148 186 158 Z" fill="#603CBA"/><path d="M184 164 C136 158 86 172 34 206 C106 196 146 198 180 202 Z" fill="#B0237E"/><path d="M178 208 C130 216 90 238 54 272 C120 252 150 248 180 250 Z" fill="#E3263A"/><path d="M182 256 C146 270 116 298 96 330 C141 306 166 298 190 294 Z" fill="#F26B22"/><path d="M196 326 C176 260 168 180 194 134 C224 104 288 98 324 114 C336 121 344 130 348 142 L348 190 L340 208 C330 250 304 296 262 322 C240 336 216 338 196 326 Z" fill="url(#f2face)"/><path d="M196 326 C176 260 168 180 194 134 C224 104 288 98 324 114 C336 121 344 130 348 142 L347 184 C332 194 320 197 314 199 C306 232 296 262 284 290 C274 268 268 240 266 212 C246 208 230 214 220 230 C214 262 220 296 226 334 C214 334 204 331 196 326 Z" fill="url(#f2hood)"/><path d="M344 140 C350 136 358 138 362 144 L362 182 C356 187 350 187 344 185 Z" fill="#F7B21E"/><circle cx="353" cy="157" r="5.5" fill="#19183C"/><circle cx="353" cy="157" r="1.8" fill="#F7B21E"/><path d="M360 142 C368 143 375 148 379 156 C384 167 384 188 376 206 C375 199 374 195 371 193 L367 198 L364 188 L350 188 L360 182 Z" fill="url(#f2beak)"/><path d="M348 191 L363 192 L366 199 C360 206 350 208 342 205 Z" fill="#6E6AC0"/><circle cx="300" cy="150" r="24" fill="#F7B21E"/><circle cx="301" cy="150" r="17" fill="#19183C"/><circle cx="307" cy="144" r="5.5" fill="#fff"/><path d="M272 128 C292 118 318 122 332 134" fill="none" stroke="#19183C" stroke-width="6" stroke-linecap="round" opacity="0.55"/></g></svg><span><b>FLOWTONNE</b><small>DATA PLATFORM</small></span></a>
+      <p>Where Quettabytes Flow at the Speed of Now. Flowtonne and the Flowtonne falcon logo are trademarks of Flowtonne.</p>
+    </div>
+    <div><h4>Platform</h4><ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#about">Architecture</a></li><li><a href="#news">Roadmap</a></li></ul></div>
+    <div><h4>Community</h4><ul><li><a href="#community">Getting started</a></li><li><a href="#community">Contributing</a></li><li><a href="#community">Code of conduct</a></li><li><a href="#community">Events</a></li></ul></div>
+    <div><h4>About</h4><ul><li><a href="#about">About us</a></li><li><a href="#news">Blog</a></li><li><a href="#community">Contact</a></li><li><a href="#top">Privacy policy</a></li></ul></div>
+  </div>
+  <div class="wrap legal">© 2026 Flowtonne · flowtonne.com</div>
+</footer>
+</body>
+</html>
